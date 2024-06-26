@@ -24,7 +24,7 @@ Algunos metodos tienen funcionalidades totalmente similares que se podrian extra
 
 */
 
-class MovieApi {
+export class MovieApi {
 
     /* Metodo getUpcomingMovies:
         -> page (int) : El número de la página de la que se quieren obtener las películas. Por defecto, es 1.
