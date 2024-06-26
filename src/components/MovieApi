@@ -256,6 +256,3 @@ class MovieApi {
 
 
 }
-
-const data = await MovieApi.()
-console.log(data)
