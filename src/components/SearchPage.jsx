@@ -3,33 +3,24 @@ import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 
 function ElementResults({ results, type }) {
-    console.log(type);
 
-    if (type.length === 0){
+    let nameHandler;
+
+    if (type.length == 0) { nameHandler = 0 }
+    else { nameHandler = 1 }
+
     return (
         <div className="container-results">
             {results.map((result) => (
                 <div key={result.id}>
                     <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
-                    <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2>
+                    {nameHandler == 0 ? <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> : <h2>{result.title}</h2>}
                     <div>⭐{result.vote_average}</div>
                 </div>
             ))}
         </div>
     );
-}
-else { 
-    (
-    <div className="container-results">
-    {results.map((result) => (
-        <div key={result.id}>
-            <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
-            <h2>{result.title}</h2>
-            <div>⭐{result.vote_average}</div>
-        </div>
-    ))}
-</div>
-);
+
 }
 }
 
