@@ -1,0 +1,60 @@
+.recommendations-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .movies-grid-r {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  
+  .movie-card-r {
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .movie-card-r img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .movie-info-r {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navigation-buttons-r {
+    width: 200px;
+  }
+  
+  .nav-button-r {
+    position: absolute;
+    padding: 10px;
+    border: 1px solid #fff;
+    background-color: #1a1a1a99;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .nav-button-r:hover {
+    background-color: #333;
+  }
+  
+  .prev-r {
+    left: 24px;
+    bottom: 270px;
+  }
+
+  .next-r {
+    right: 24px;
+    bottom: 270px;
+  }
