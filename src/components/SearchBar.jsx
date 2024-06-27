@@ -2,7 +2,7 @@ import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useState } from "react"
 
-function SearchBarPage( { title, imgPath } ) {
+function SearchBarPage({ title, imgPath }) {
     return (
         <>
             <div className="search-bar-result">
@@ -11,9 +11,7 @@ function SearchBarPage( { title, imgPath } ) {
             </div>
             <div className="separator"></div>
         </>
-
     )
-
 }
 
 function SearchBar() {
@@ -32,7 +30,7 @@ function SearchBar() {
             <button className="select-showtypes">
 
             </button>
-            <input type="text" onChange={saveInput}></input>
+            <input type="text" placeholder="Buscar en IMDb" onChange={saveInput}></input>
             <div className='results-searchbar'>
 
                 {results.map(r => 
