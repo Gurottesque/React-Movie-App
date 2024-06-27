@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const AUTH_KEY = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWI0ZGZkZTIyYTU2ODBhYmU5YjlhNjg3YmE4ZWNiMSIsIm5iZiI6MTcxOTQzMDg2My44MTUxMDIsInN1YiI6IjY2N2M2ZDE2MDkzMTRmMTFlNTc1OWFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSp73AhBXPUrKbMahKgfZdNUUkcd6xBZgcSxdj_yM5Q'
+const AUTH_KEY = '  Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWI0ZGZkZTIyYTU2ODBhYmU5YjlhNjg3YmE4ZWNiMSIsIm5iZiI6MTcxOTQzMDg2My44MTUxMDIsInN1YiI6IjY2N2M2ZDE2MDkzMTRmMTFlNTc1OWFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSp73AhBXPUrKbMahKgfZdNUUkcd6xBZgcSxdj_yM5Q'
 
 /* Objeto MovieAPI
 
@@ -348,7 +348,17 @@ export class MovieApi {
         return imagePath !== null ? `https://image.tmdb.org/t/p/w500/${imagePath}` : "../assets/image-load-failed.jpg"
     }
 
-
+    static async getShowImages(id) {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/images`, {
+                headers: {
+                    Authorization: AUTH_KEY
+                }
+            });
+            return response.data.results;
+        } catch (error) {
+            console.error('Error al buscar las imagenes:', error);
+            throw error;
+        }
+    }
 }
-
-console.log(await MovieApi.getGenres())
