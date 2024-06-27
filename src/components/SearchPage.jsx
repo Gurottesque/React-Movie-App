@@ -36,6 +36,10 @@ function SearchPage() {
         fetchGenres();
     }, []);
 
+    useEffect(() => {
+        handleSearch(inputValue);
+    }, [genresFilter]);
+
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             handleSearch(inputValue);
@@ -44,7 +48,7 @@ function SearchPage() {
 
     const handleSearch = async (queryString) => {
         if (genresFilter.length === 0) {
-            const results = await MovieApi.searchAPI('search/multi', { query: inputValue });
+            const results = await MovieApi.searchAPI('search/multi', { query: queryString });
             setResults(results);
         } else {
             const results = await MovieApi.searchAPI('discover/movie', { with_genres: genresFilter.join(',') });
@@ -84,7 +88,7 @@ function SearchPage() {
                 ))}
             </div>
         </>
-    )
+    );
 }
 
 export default SearchPage;
