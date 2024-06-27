@@ -1,32 +1,57 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+import { MovieApi } from './MovieApi';
 import '../stylesheets/MoviesMain.css'
 
 const MoviesMain = () => {
-  const images = [
-    'https://static.vecteezy.com/system/resources/thumbnails/022/666/061/small/owl-face-silhouettes-owl-face-svg-black-and-white-owl-vector.jpg',
-    'https://static.vecteezy.com/system/resources/thumbnails/022/666/314/small/lion-face-silhouettes-lion-face-svg-black-and-white-lion-vector.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdTBzKKIAqZHWsnbvZzh4f0rdc1cdY0aBAWK4a883adosnY3k41iOTsTlHjNhCe5S544o&usqp=CAU'
-  ];
-
+  const [movie, setMovie] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
 
+  const movieIds = [603, 504, 200, 345];
+
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const movieData = await MovieApi.getMovieById(movieIds[imageIndex]);
+        setMovie(movieData);
+      } catch (error) {
+        console.error('Error al acceder a la pelicula:', error);
+        throw error;
+      }
+    };
+
+    fetchMovie();
+  }, [imageIndex]);
+
   const handlePrev = () => {
-    setImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setImageIndex((prevIndex) => (prevIndex - 1 + movieIds.length) % movieIds.length);
   };
 
   const handleNext = () => {
-    setImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setImageIndex((prevIndex) => (prevIndex + 1) % movieIds.length);
   };
 
   return (
     <div className='movies-main-container'>
-      <img 
-        className='movies-main-img'
-        src={images[imageIndex]} 
-        alt="movie-img" 
-      />
-      <button onClick={handlePrev}>Prev</button>
-      <button onClick={handleNext}>Next</button>
+      <button className='nav-button prev' onClick={handlePrev}>&lt;</button>
+      {movie && (
+        <>
+          <img 
+            className='movies-main-img'
+            src={MovieApi.getImage(movie.poster_path)} 
+            alt={movie.title} 
+          />
+          <div className='movie-info'>
+            <button className='add-button'>+</button>
+            <img className='movie-card' src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
+            <div className='movie-details'>
+              <h2>{movie.title}</h2>
+              <p>Watch the Trailer</p>
+            </div>
+          </div>
+        </>
+      )}
+      <button className='nav-button next' onClick={handleNext}>&gt;</button>
     </div>
   )
 }
