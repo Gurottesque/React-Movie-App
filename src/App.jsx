@@ -1,6 +1,8 @@
 import './stylesheets/App.css'
 import MoviesMain from './components/MoviesMain'
 import SearchBar from './components/SearchBar'
+import { Route, Routes } from 'react-router-dom'
+import * as React from "react";
 
 const Home = () =>{
   return(
@@ -35,11 +37,11 @@ function App() {
           <SearchBar/>
         </nav>
       </header>
-      <Routers>
+      <Routes>
         <Route path = '/' element = {<Home/>}> </Route>;
         <Route path = '/search' element = {<SearchPage/>}> </Route>;
         <Route path = '/description' element = {<Description/>}> </Route>;
-      </Routers>
+      </Routes>
     </div>
   )
 }
