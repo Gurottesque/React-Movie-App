@@ -6,13 +6,10 @@ import { useState } from 'react';
 import {Home} from './components/Home';
 
 function App() {
-  const [inSearchPage, setinSearchPage] = useState(false)
-
   return (
     <div className='App'>
       <header className='header'>
-        <nav>
-          
+        <nav
           <div className='logo' >
             <Link to = '/'> 
               <img src = 'https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg' alt = 'Netflix Logo' />
@@ -21,12 +18,7 @@ function App() {
           <SearchBar/>
         </nav>
       </header>
-      <Routes>
-        <Route path = '/' element = {<Home/>}> </Route>;
-        <Route path = '/search' element = {<SearchPage/>}> </Route>;
-        <Route path = '/description' element = {<Description/>}> </Route>;
-      </Routes>
-
+    <SearchPage></SearchPage>
     </div>
   )
 }
