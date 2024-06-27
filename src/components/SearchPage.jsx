@@ -3,14 +3,12 @@ import "../stylesheets/SearchBar.css"
 import { useState } from "react"
 
 function ElementResults( { title, rate, entityType, imgPath } ) {
-
-    console.log(title)
     
     return (
         <>
-            <div>{title}</div>
-            <div>{rate}</div>
-            <div>{entityType}</div>
+            <div className="element-title">{title}</div>
+            <div className="element-rate">{rate}</div>
+            <div className="entityType">{entityType}</div>
             <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
         </>
 
@@ -54,11 +52,8 @@ function SearchPage() {
 
         <div className="search-page-results">
             {results.map( r =>{
-                <ElementResults name={r.name} 
-                title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
-                       r.media_type == 'tv' ? r.name : r.name}
-                key={r.id}
-                imgPath={r.media_type == 'person' ? r.profile_path : r.poster_path }/>}
+                <ElementResults 
+            }
             )}
         </div>
         </>
