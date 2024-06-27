@@ -1,5 +1,21 @@
 .search-bar {
     margin : 0 auto;
     
+}
+
+.search-bar-result {
+    margin : 0 auto;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Espacio entre los elementos (abajo) */  
     
+}
+.img-result {
+    height: 10vh;
+}
+
+.separator {
+    width: auto;
+    height: 2px;
+    border-bottom: 1px solid #ccc;
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './MoviesMain.css'
+import '../stylesheets/MoviesMain.css'
 
 const MoviesMain = () => {
   const images = [

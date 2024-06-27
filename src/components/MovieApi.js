@@ -255,4 +255,15 @@ export class MovieApi {
     }
 
 
+    /* Metodo searchByPersonName:
+        -> name (string) : El nombre de la persona por el que se quiere buscar.
+        -> page (int) : El número de la página de la que se quieren obtener los resultados. Por defecto, es 1.
+
+    Busca personas por nombre. 
+    */
+    static getImage(imagePath) {
+        return `https://image.tmdb.org/t/p/w500/${imagePath}`
+    }
+
+
 }
