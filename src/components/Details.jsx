@@ -6,6 +6,7 @@ import { MovieApi } from './MovieApi'
 const Details = ({id}) => {
   const [movie, setMovie] = useState(null);
   const [imgs, setImgs] = useState(null);
+
   
   useEffect(() => {
     const fetchMovie = async () => {
