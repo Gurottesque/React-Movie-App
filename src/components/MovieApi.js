@@ -330,5 +330,3 @@ export class MovieApi {
 
 
 }
-
-console.log(await MovieApi.getGenres())

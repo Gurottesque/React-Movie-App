@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 
 const genres = await MovieApi.getGenres();
 
-function ElementResults( { results } ) {
+function ElementResults( { results, genresFilter } ) {
     return (
         <>
         <div className="container-results">
@@ -60,9 +60,12 @@ function SearchPage() {
     };
 
     useEffect(() => {
-        const filteredResults = results.filter(show => {
-            show.genre_ids.some(genre => { genresFilter.includes(genre.id)})}
-        );
+        const filteredResults = [];
+        for (let result of results){
+            for (let id of result.genre_ids){
+                if(genresFilter.includes(id)){ filteredResults.push(result)}
+            }
+        }
         setResults(filteredResults);
     }, [genresFilter]);
 
@@ -82,7 +85,7 @@ function SearchPage() {
 
         </div>
         <div className="results-container">
-            <ElementResults results={results} />
+            <ElementResults results={results} genresFilter={genresFilter}/>
         </div>
         <div className="filters">
         {genres.map((genre) => (
