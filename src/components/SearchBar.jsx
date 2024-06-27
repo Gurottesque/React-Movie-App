@@ -1,15 +1,22 @@
-import { MovieApi } from "./MovieApi.js";
-import "../stylesheets/SearchBar.css";
-import { useState } from "react";
 
-function SearchBarPage({ title, imgPath }) {
+import { MovieApi } from "./MovieApi.js"
+import "../stylesheets/SearchBar.css"
+import { useEffect, useState } from "react"
+import { Link,Route } from "react-router-dom"
+
+function SearchBarPage({ title, element_id, imgPath}) {
+
+
     return (
         <>
-            <div className="search-bar-result">
-                <img className="img-result" src={MovieApi.getImage(imgPath)} alt={title} />
-                <div className="title">{title}</div>
-            </div>
-            <div className="separator"></div>
+
+            <Link to={`/details/${element_id}`} className="link-to-details">
+                <div className="search-bar-result">
+                    <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
+                    <div className="title">{title}</div>
+                </div>
+                <div className="separator"></div>
+            </Link>
         </>
     );
 }
@@ -32,15 +39,19 @@ function SearchBar() {
                 <img src="./magnifying-glass-solid.svg" alt="search-icon" />
             </button>
 
+
             </div>
             <div className="results-searchbar">
-                {results.map(r =>
+
+                {results.map(r => 
+                    
                     <SearchBarPage
-                        name={r.name}
-                        title={r.media_type === 'movie' || r.media_type === 'collection' ? r.title :
-                               r.media_type === 'tv' ? r.name : r.name}
-                        key={r.id}
-                        imgPath={r.media_type === 'person' ? r.profile_path : r.poster_path} />
+                                    title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
+                                            r.media_type == 'tv' ? r.name : r.name}
+                                    key={r.id}
+                                    element_id={r.id}
+                                    imgPath={r.media_type == 'person' ? r.profile_path : r.poster_path }
+                                    type ={r.media_type}/>
                 )}
             </div>
         </div>

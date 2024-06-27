@@ -7,8 +7,8 @@ const Details = ({id}) => {
   
   useEffect(() => {
     const fetchMovie = async () => {
-      const movie = await MovieApi.getMovieById(id);
-      const imgs = await MovieApi.getShowImages(id); 
+      const movie = await MovieApi.getData(`movie/${id}`, '', '');
+      const imgs = await MovieApi.getData(`movie/${id}/images`, '', ''); 
       setMovie(movie);
       setImgs(imgs);
     }
@@ -35,7 +35,6 @@ const Details = ({id}) => {
             <p>Release Date: {movie.release_date}</p>
             <p>Runtime: {movie.runtime} minutes</p>
             <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
-            
           </div>
         </div>
       )}
