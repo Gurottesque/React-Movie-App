@@ -11,13 +11,8 @@ const MoviesMain = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      try {
         const movieData = await MovieApi.getMovieById(movieIds[imageIndex]);
         setMovie(movieData);
-      } catch (error) {
-        console.error('Error al acceder a la pelicula:', error);
-        throw error;
-      }
     };
 
     fetchMovie();

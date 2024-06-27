@@ -88,6 +88,26 @@ export class MovieApi {
 
     }
 
+    static async getMoviesById(ids) {
+        try {
+            const objectMovies = []
+            for ( movi in ids){
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                    headers: {
+                        Authorization: AUTH_KEY
+                    }
+                });
+                objectMovies.push(response.data);
+            }
+            return objectMovies;
+        } catch (error) {
+            console.error('Error al acceder a las peliculas:', error);
+            throw error;
+        }
+    }
+
+
+
     /* Metodo getShowById:
         -> id (int) : El ID del show del que se quiere obtener la información.
 
