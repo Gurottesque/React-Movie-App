@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MovieApi } from './MovieApi'
 
-
-
 const Details = ({id}) => {
   const [movie, setMovie] = useState(null);
   const [imgs, setImgs] = useState(null);
