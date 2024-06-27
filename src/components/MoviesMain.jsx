@@ -10,7 +10,7 @@ const MoviesMain = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-        const movieData = await MovieApi.getMovieById(movieIds[imageIndex]);
+        const movieData = await MovieApi.getData(`movie/${movieIds[imageIndex]}`,'','');
         setMovie(movieData);
     };
 

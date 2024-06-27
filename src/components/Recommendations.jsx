@@ -9,8 +9,9 @@ const Recommendations = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendingMovies = await MovieApi.getTrending('week', 'movie');
-        setMovies(trendingMovies);
+        const trendingMovies = await MovieApi.getData('trending/movie/week', '','');
+        console.log(trendingMovies.results)
+        setMovies(trendingMovies.results);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }

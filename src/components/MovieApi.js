@@ -27,7 +27,7 @@ export class MovieApi {
 
     static async getData(endpoint,extraData,params) {
         try {
-            const url = new URL(`https://api.themoviedb.org/3/${endpoint}/${extraData}`);
+            const url = new URL(`https://api.themoviedb.org/3/${endpoint}${extraData}`);
 
             const searchParams = new URLSearchParams(params);
 
@@ -44,7 +44,6 @@ export class MovieApi {
             throw error;
         }
     }
-}
 
     static async getGenres() {
         try {
