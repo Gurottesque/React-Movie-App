@@ -34,6 +34,7 @@ const Recommendations = () => {
   const selectedMovies = movies.slice(startIndex, startIndex + moviesPerPage);
 
   return (
+    <div>
     <div className="recommendations-container-r">
       <div className="movies-grid-r">
         {selectedMovies.map((movie) => (
@@ -55,6 +56,26 @@ const Recommendations = () => {
         )}
       </div>
     </div>
+    <div className='footer'>
+      <div className='condiciones'>
+        <p>Ayuda</p>
+        <p>Indice del siti</p>
+        <p>Condiciones de uso</p>
+        <p>Politicas de privacidad</p>
+      </div>
+      <div className='nombresG'>
+        <p>Angel Andres BedoYa</p>
+        <p>David Londoño</p>
+        <p>Nicolas Vega</p>
+        <p>Juan Gomeez</p>
+      </div>
+      <p className='bootcamp'><strong>EliteStacks</strong></p>
+    </div>
+    
+    </div>
+    
+    
+    
   );
 };
 

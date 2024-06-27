@@ -1,4 +1,4 @@
-
+j
 import { MovieApi } from "./MovieApi"
 
 export function Preview ({title, imgPath}) {

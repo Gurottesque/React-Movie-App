@@ -1,3 +1,10 @@
+.brackground-home{
+    align-items: center;
+}
+.brackground-home{
+    display: flex;
+    flex-direction: column;
+}
 .carrousel-div {
     display: flex;
     flex-direction: column;
