@@ -2,30 +2,24 @@ import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 
-const genres = await MovieApi.getGenres();
-
-function ElementResults( { results } ) {
+function ElementResults({ results }) {
+    console.log(results.title);
     return (
-        <>
         <div className="container-results">
-            {results.map((result, index) => (
-                <div key={index}>
-                    <img className="img-search" src={MovieApi.getImage(result.poster_path)}></img>
-                    <h2>{result.media_type == 'movie' || result.media_type == 'collection' ? result.title :
-                                            result.media_type == 'tv' ? result.name : result.name}</h2>
+            {results.map((result) => (
+                <div key={result.id}>
+                    <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
+                    <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2>
                     <div>⭐{result.vote_average}</div>
                 </div>
             ))}
         </div>
-        </>
     );
-
 }
 
-function Genre( { name, onClickHandler }){
+function Genre({ name, onClickHandler }) {
     return (
-        <button onClick={onClickHandler}>{name}
-        </button>
+        <button onClick={onClickHandler}>{name}</button>
     )
 }
 
@@ -33,6 +27,15 @@ function SearchPage() {
     const [results, setResults] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [genresFilter, setGenresFilter] = useState([]);
+    const [genres, setGenres] = useState([]);
+
+    useEffect(() => {
+        async function fetchGenres() {
+            const genres = await MovieApi.getGenres();
+            setGenres(genres);
+        }
+        fetchGenres();
+    }, []);
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -40,9 +43,14 @@ function SearchPage() {
         }
     };
 
-    const handleSearch = async (value) => {
-        const results = await MovieApi.searchByKeyword(value);
-        setResults(results);
+    const handleSearch = async (queryString) => {
+        if (genresFilter.length === 0) {
+            const results = await MovieApi.searchAPI('search/multi', { query: inputValue });
+            setResults(results);
+        } else {
+            const results = await MovieApi.searchAPI('discover/movie', { with_genres: genresFilter.join(',') });
+            setResults(results);
+        }
     };
 
     const handleChange = (event) => {
@@ -50,50 +58,34 @@ function SearchPage() {
     };
 
     const filterSearch = (genreId) => {
-        if (genresFilter.includes(genreId)) {
-            const tempGenres = genresFilter.filter(id => id !== genreId);
-            setGenresFilter(tempGenres);
-        } else {
-            const tempGenres = [...genresFilter, genreId];
-            setGenresFilter(tempGenres);
-        }
-    };
-
-    useEffect(() => {
-        const filteredResults = results.filter(show => {
-            show.genre_ids.some(genre => { genresFilter.includes(genre.id)})}
+        setGenresFilter(prev => 
+            prev.includes(genreId) ? prev.filter(id => id !== genreId) : [...prev, genreId]
         );
-        setResults(filteredResults);
-    }, [genresFilter]);
+    };
 
     return (
         <>
-        <div className='search-bar'>
-            <button className="select-showtypes">
-            </button>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-                placeholder="Buscar..."
-            />
-            
-
-        </div>
-        <div className="results-container">
-            <ElementResults results={results} />
-        </div>
-        <div className="filters">
-        {genres.map((genre) => (
-                <Genre key={genre.id} name={genre.name} onClickHandler={() => filterSearch(genre.id)}/>
-            ))}
-            
-        </div>
-
+            <div className='search-bar'>
+                <button className="select-showtypes">
+                </button>
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Buscar..."
+                />
+            </div>
+            <div className="results-container">
+                <ElementResults results={results} />
+            </div>
+            <div className="filters">
+                {genres.map((genre) => (
+                    <Genre key={genre.id} name={genre.name} onClickHandler={() => filterSearch(genre.id)} />
+                ))}
+            </div>
         </>
     )
 }
 
-
-export default SearchPage
+export default SearchPage;

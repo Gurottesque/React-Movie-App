@@ -21,7 +21,6 @@ function SearchBar() {
         const inputValue = event.target.value;
         const results = await MovieApi.searchByKeyword(inputValue);
         const resultsFiltered = results.slice(0,5);
-        console.log(resultsFiltered)
         setResults(resultsFiltered);
     };
 
