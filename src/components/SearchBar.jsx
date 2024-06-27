@@ -6,7 +6,6 @@ import { Link,Route } from "react-router-dom"
 
 function SearchBarPage({ title, element_id, imgPath}) {
 
-
     return (
         <>
 
