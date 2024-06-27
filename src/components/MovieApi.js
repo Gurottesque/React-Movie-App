@@ -25,6 +25,27 @@ export class MovieApi {
         }
     }
 
+    static async getData(endpoint,extraData,params) {
+        try {
+            const url = new URL(`https://api.themoviedb.org/3/${endpoint}/${extraData}`);
+
+            const searchParams = new URLSearchParams(params);
+
+            url.search = searchParams.toString();            
+            const response = await axios.get(url.toString(), {
+                headers: {
+                    Authorization: `Bearer ${AUTH_KEY}`
+                }
+            });
+            console.log(url.toString())
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+}
+
     static async getGenres() {
         try {
             const response1 = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=en-US`, {
