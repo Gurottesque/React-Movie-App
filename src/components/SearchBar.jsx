@@ -1,3 +1,4 @@
+
 import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
@@ -7,6 +8,7 @@ function SearchBarPage({ title, element_id, imgPath}) {
 
     return (
         <>
+
             <Link to={`/details/${element_id}`} className="link-to-details">
                 <div className="search-bar-result">
                     <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
@@ -15,7 +17,7 @@ function SearchBarPage({ title, element_id, imgPath}) {
                 <div className="separator"></div>
             </Link>
         </>
-    )
+    );
 }
 
 function SearchBar() {
@@ -23,18 +25,22 @@ function SearchBar() {
 
     const saveInput = async (event) => {
         const inputValue = event.target.value;
-        const results = await MovieApi.getData('/search/multi', '', {query: inputValue});
-        const resultsFiltered = results.results.slice(0,5);
+        const results = await MovieApi.getData('/search/multi', '', { query: inputValue });
+        const resultsFiltered = results.results.slice(0, 5);
         setResults(resultsFiltered);
     };
 
     return (
-        <div className='search-bar'>
-            <button className="select-showtypes">
-
+        <div className="search-bar">
+            <div className="search-input">
+            <input type="text" placeholder="Buscar en IMDb" onChange={saveInput} />
+            <button className="search-glass">
+                <img src="./magnifying-glass-solid.svg" alt="search-icon" />
             </button>
-            <input type="text" placeholder="Buscar en IMDb" onChange={saveInput}></input>
-            <div className='results-searchbar'>
+
+
+            </div>
+            <div className="results-searchbar">
 
                 {results.map(r => 
                     
@@ -46,10 +52,9 @@ function SearchBar() {
                                     imgPath={r.media_type == 'person' ? r.profile_path : r.poster_path }
                                     type ={r.media_type}/>
                 )}
-
             </div>
         </div>
     );
-};
+}
 
-export default SearchBar
+export default SearchBar;
