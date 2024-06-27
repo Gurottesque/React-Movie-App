@@ -348,7 +348,17 @@ export class MovieApi {
         return imagePath !== null ? `https://image.tmdb.org/t/p/w500/${imagePath}` : "../assets/image-load-failed.jpg"
     }
 
-
+    static async getShowImages(id) {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/images`, {
+                headers: {
+                    Authorization: AUTH_KEY
+                }
+            });
+            return response.data.results;
+        } catch (error) {
+            console.error('Error al buscar las imagenes:', error);
+            throw error;
+        }
+    }
 }
-
-console.log(await MovieApi.getGenres())
