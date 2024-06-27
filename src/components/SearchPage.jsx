@@ -2,19 +2,26 @@ import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useState } from "react"
 
-function ElementResults( { title, rate, entityType, imgPath } ) {
+function ElementResults( { results } ) {
+    const setDefaultImage= (e) => {
+        e.target.src = "../assets/img-load-failed.svg"
 
-    console.log(title)
-    
+    }
+
     return (
         <>
-            <div>{title}</div>
-            <div>{rate}</div>
-            <div>{entityType}</div>
-            <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
+        <div className="container-results">
+            {results.map((result, index) => (
+                <div key={index}>
+                    <img className="img-search" src={MovieApi.getImage(result.poster_path)} onError={setDefaultImage}></img>
+                    <h2>{result.media_type == 'movie' || result.media_type == 'collection' ? result.title :
+                                            result.media_type == 'tv' ? result.name : result.name}</h2>
+                    <div>⭐{result.vote_average}</div>
+                </div>
+            ))}
+        </div>
         </>
-
-    )
+    );
 
 }
 
@@ -50,19 +57,13 @@ function SearchPage() {
                 placeholder="Buscar..."
             />
             
+            <div className="results-container">
+            <ElementResults results={results} />
+            </div>
         </div>
 
-        <div className="search-page-results">
-            {results.map( r =>{
-                <ElementResults name={r.name} 
-                title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
-                       r.media_type == 'tv' ? r.name : r.name}
-                key={r.id}
-                imgPath={r.media_type == 'person' ? r.profile_path : r.poster_path }/>}
-            )}
-        </div>
         </>
-    );
+    )
 }
 
 
