@@ -18,7 +18,7 @@ function SearchBar() {
     };
 
     return (
-        <div className='search-button'>
+        <div className='search-bar'>
             <input type="text" onChange={showResults}></input>
             <div className='results'>
                 {results.map((a, index) => (
