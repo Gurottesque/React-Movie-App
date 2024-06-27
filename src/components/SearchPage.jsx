@@ -5,7 +5,7 @@ import { useState } from "react"
 const movies = await MovieApi.getUpcomingMovies()
 
 
-function SearchBarPage( { title, image_path } ) {
+function SearchResults( { title, image_path } ) {
     return (
         <>
             <div className="search-bar-result">
@@ -19,37 +19,47 @@ function SearchBarPage( { title, image_path } ) {
 
 }
 
-function SearchBar() {
+function SearchPage() {
     const [results, setResults] = useState([]);
+    const [inputValue, setInputValue] = useState('');
 
-    const saveInput = async (event) => {
-        const inputValue = event.target.value;
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch(inputValue);
+        }
+    };
+
+    const handleSearch = async (value) => {
         const results = await MovieApi.searchByKeyword(inputValue);
-        const resultsFiltered = results.slice(0,5);
-        console.log(resultsFiltered)
-        setResults(resultsFiltered);
+        setResults(results);
+    };
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
     };
 
     return (
         <div className='search-bar'>
             <button className="select-showtypes">
-
             </button>
-            <input type="text" onChange={saveInput}></input>
-            <div className='results-searchbar'>
-
+            <input
+                type="text"
+                value={inputValue}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                placeholder="Ingresa tu búsqueda..."
+            />
                 {results.map(r => 
                     
-                    <SearchBarPage name={r.name} 
+                    <SearchResults name={r.name} 
                                      title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
                                             r.media_type == 'tv' ? r.name : r.name}
                                      key={r.id}
                                      image_path={r.media_type == 'person' ? r.profile_path : r.poster_path }/>
                 )}
-
-            </div>
         </div>
     );
-};
+}
 
-export default SearchBar
+
+export default SearchPage

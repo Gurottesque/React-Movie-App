@@ -2,7 +2,9 @@ import './stylesheets/App.css'
 import MoviesMain from './components/MoviesMain'
 import SearchBar from './components/SearchBar'
 import { Route, Routes } from 'react-router-dom'
-import * as React from "react";
+import SearchPage from './components/SearchPage'
+import { useState } from 'react'
+
 
 const Home = () =>{
   return(
@@ -13,23 +15,10 @@ const Home = () =>{
   );
 }
 
-const SearchPage = () =>{
-  return(
-    <div>
-      <h1>Search Page</h1>
-    </div>
-  );
-}
-
-const Description = () =>{
-  return(
-    <div>
-      <h1>Description</h1>
-    </div>
-  );
-}
 
 function App() {
+  const [inSearchPage, setinSearchPage] = useState(false)
+
   return (
     <div className='App'>
       <header>
@@ -42,6 +31,7 @@ function App() {
         <Route path = '/search' element = {<SearchPage/>}> </Route>;
         <Route path = '/description' element = {<Description/>}> </Route>;
       </Routes>
+
     </div>
   )
 }
