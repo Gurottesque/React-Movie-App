@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MovieApi } from './MovieApi'
+import '../stylesheets/Details.css'
 
 const Details = ({id}) => {
   const [movie, setMovie] = useState(null);
@@ -24,19 +25,18 @@ const Details = ({id}) => {
     <div className='main-details-container'>
       {movie && (
         <div className='details-container'>
-          <img 
-            className='details-img'
-            src={MovieApi.getImage(movie.poster_path)} 
-            alt={movie.title} 
-          />
-          <div className='details-info'>
-            <h2>{movie.title}</h2>
+            <h1>{movie.title}</h1>
+            <div className='details-img'>
+              <img 
+                src={MovieApi.getImage(movie.poster_path)} 
+                alt={movie.title} 
+              />
+            </div>
+            <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
             <p>{movie.overview}</p>
             <p>Rating: {movie.vote_average}</p>
             <p>Release Date: {movie.release_date}</p>
             <p>Runtime: {movie.runtime} minutes</p>
-            <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
-          </div>
         </div>
       )}
     </div>
