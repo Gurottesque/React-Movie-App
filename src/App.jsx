@@ -14,7 +14,7 @@ function App() {
               <img className='logo-img' src='https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg' alt='IMBD Logo' />
             </Link>
           <div className='menu'>
-            <img className='menu-icon' src="/public/bars-solid.svg" alt="menu" />
+            <img className='menu-icon' src="/bars-solid.svg" alt="menu" />
           </div>
           <SearchBar/>
         </nav>
