@@ -2,7 +2,7 @@
 import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
-import { Link,Route } from "react-router-dom"
+import { Link, Route } from "react-router-dom"
 
 function SearchBarPage({ title, element_id, imgPath}) {
 

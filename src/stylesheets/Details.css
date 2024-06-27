@@ -1,0 +1,10 @@
+.main-details-container {
+    margin-left: 60px;
+    font-weight: 600;
+}
+
+.details-img img {
+    width: 300px;
+    height: 350px;
+    border-radius: 12px;
+}
