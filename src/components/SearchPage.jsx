@@ -22,7 +22,6 @@ function ElementResults({ results, type }) {
     );
 
 }
-}
 
 function Genre({ name, onClickHandler }) {
     return (
