@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import {useParams} from 'react-router-dom'
 import { MovieApi } from './MovieApi'
 
-const Details = ({id}) => {
+
+const Details = () => {
   const [movie, setMovie] = useState(null);
   const [imgs, setImgs] = useState(null);
-
+  const {id} = useParams();
   
   useEffect(() => {
     const fetchMovie = async () => {
