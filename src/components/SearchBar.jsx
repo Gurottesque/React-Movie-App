@@ -19,8 +19,8 @@ function SearchBar() {
 
     const saveInput = async (event) => {
         const inputValue = event.target.value;
-        const results = await MovieApi.getData('/search/multi');
-        const resultsFiltered = results.slice(0,5);
+        const results = await MovieApi.getData('/search/multi', '', {query: inputValue});
+        const resultsFiltered = results.results.slice(0,5);
         setResults(resultsFiltered);
     };
 
