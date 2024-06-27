@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Await } from 'react-router-dom';
 
 const AUTH_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWI0ZGZkZTIyYTU2ODBhYmU5YjlhNjg3YmE4ZWNiMSIsIm5iZiI6MTcxOTQzMDg2My44MTUxMDIsInN1YiI6IjY2N2M2ZDE2MDkzMTRmMTFlNTc1OWFhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSp73AhBXPUrKbMahKgfZdNUUkcd6xBZgcSxdj_yM5Q';
 
@@ -10,8 +11,7 @@ export class MovieAPI2 {
             
             const searchParams = new URLSearchParams(params);
             
-            url.search = searchParams.toString();
-            
+            url.search = searchParams.toString();            
             const response = await axios.get(url.toString(), {
                 headers: {
                     Authorization: `Bearer ${AUTH_KEY}`
@@ -24,8 +24,30 @@ export class MovieAPI2 {
             throw error;
         }
     }
+
+    static async getData(endpoint,extraData,params) {
+        try {
+            const url = new URL(`https://api.themoviedb.org/3/${endpoint}/${extraData}`);
+            
+            const searchParams = new URLSearchParams(params);
+            
+            url.search = searchParams.toString();            
+            const response = await axios.get(url.toString(), {
+                headers: {
+                    Authorization: `Bearer ${AUTH_KEY}`
+                }
+            });
+            console.log(url.toString())
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 }
 
 
+// console.log(await MovieAPI2.searchAPI(`movie/${603}`, {language: 'en-US'}));
+console.log(await MovieAPI2.getData(`movie/`,'latest',''));
 
 
