@@ -2,3 +2,8 @@
     display: flex;
     justify-content: center;
 }
+
+.logo-img {
+    width: 70px;
+    height: 40px;
+}
