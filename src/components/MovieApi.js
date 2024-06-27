@@ -154,14 +154,77 @@ export class MovieApi {
     Obtiene todos los géneros de las películas.
     */
 
-    static async getGenres() {
+    static async getGenresNames() {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=en-US`, {
+            const response1 = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=en-US`, {
                 headers: {
                     Authorization: AUTH_KEY
                 }
             });
-            return response.data.genres;
+            const response2 = await axios.get(`https://api.themoviedb.org/3/genre/tv/list?language=en-US`, {
+                headers: {
+                    Authorization: AUTH_KEY
+                }
+            });
+            // Extraer los géneros de ambas respuestas
+            const movieGenres = response1.data.genres;
+            const tvGenres = response2.data.genres;
+
+            // Combinar ambas listas en un solo array
+            const combinedGenres = [...movieGenres, ...tvGenres];
+
+            // Utilizar un Map para almacenar los géneros únicos por su ID
+            const uniqueGenresMap = new Map();
+            
+            combinedGenres.forEach(genre => {
+                uniqueGenresMap.set(genre.id, genre); // Utilizar el ID como clave para asegurar la unicidad
+            });
+
+            // Convertir el Map de vuelta a un array de objetos
+            const uniqueGenresArray = Array.from(uniqueGenresMap.values());
+
+            return uniqueGenresArray;
+        } catch (error) {
+            console.error('Error al acceder a los generos:', error);
+            throw error;
+        }
+    }
+
+    /* Metodo getGenres:
+
+    Obtiene todos los géneros de las películas.
+    */
+
+    static async getGenres() {
+        try {
+            const response1 = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?language=en-US`, {
+                headers: {
+                    Authorization: AUTH_KEY
+                }
+            });
+            const response2 = await axios.get(`https://api.themoviedb.org/3/genre/tv/list?language=en-US`, {
+                headers: {
+                    Authorization: AUTH_KEY
+                }
+            });
+        // Extraer los géneros de ambas respuestas
+        const movieGenres = response1.data.genres;
+        const tvGenres = response2.data.genres;
+
+        // Combinar ambas listas en un solo array
+        const combinedGenres = [...movieGenres, ...tvGenres];
+
+        // Utilizar un Map para almacenar los géneros únicos por su ID
+        const uniqueGenresMap = new Map();
+        
+        combinedGenres.forEach(genre => {
+            uniqueGenresMap.set(genre.id, genre); // Utilizar el ID como clave para asegurar la unicidad
+        });
+
+        // Convertir el Map de vuelta a un array de objetos
+        const uniqueGenresArray = Array.from(uniqueGenresMap.values());
+
+        return uniqueGenresArray;
         } catch (error) {
             console.error('Error al acceder a los generos:', error);
             throw error;
@@ -282,8 +345,10 @@ export class MovieApi {
     Busca personas por nombre. 
     */
     static getImage(imagePath) {
-        return `https://image.tmdb.org/t/p/w500/${imagePath}`
+        return imagePath !== null ? `https://image.tmdb.org/t/p/w500/${imagePath}` : "../assets/image-load-failed.jpg"
     }
 
 
 }
+
+console.log(await MovieApi.getGenres())
