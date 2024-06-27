@@ -1,8 +1,9 @@
 import './stylesheets/App.css';
 import SearchBar from './components/SearchBar';
-import { Link } from 'react-router-dom';
+
+import { Link, Route, Routes } from 'react-router-dom';
+import {Home} from './components/Home';
 import MoviesMain from './components/MoviesMain';
-import './App.css'
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
           <SearchBar/>
         </nav>
       </header>
+      <Routes>
+        <Route path = '/' element = {<Home/>} />
+        <Route path = '/search' />
+      </Routes>    
       <MoviesMain />
     </div>
   )
