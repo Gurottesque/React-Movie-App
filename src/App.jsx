@@ -3,8 +3,8 @@ import SearchBar from './components/SearchBar';
 
 import { Link, Route, Routes } from 'react-router-dom';
 import {Home} from './components/Home';
-import MoviesMain from './components/MoviesMain';
 import SearchPage from './components/SearchPage';
+import Details from './components/Details';
 
 function App() {
   return (
@@ -20,10 +20,10 @@ function App() {
         </nav>
       </header>
       <Routes>
-        <Route path = '/' element = {<Home/>} />
-
-      </Routes>  
+        <Route path = '/' element = {<Home/>} /> 
         <Route path = '/search' element = {<SearchPage />}/>
+        <Route path = '/details' element = {<Details
+        id= '603'/>}/>
       </Routes>    
     </div>
   )
