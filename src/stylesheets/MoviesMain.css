@@ -4,28 +4,32 @@
     align-items: center;
     position: relative;
     margin: 28px;
-    background-color: #000;
+    background-color: #222222;
     padding: 20px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.movies-main-container:hover {
+    background-color: #1a1a1a;
 }
 
 .movies-main-img {
     width: 500px;
     height: 350px;
-    object-fit: cover;
     border-radius: 10px;
 }
 
 .nav-button {
     position: absolute;
-    background-color: rgba(26, 26, 26, 0.6);
+    background-color: #1a1a1a99;
     color: #fff;
     font-family: inherit;
     font-weight: 500;
     font-size: 1.2em;
     top: 50%;
     transform: translateY(-50%);
-    border: none;
+    border: 1px solid #fff;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;

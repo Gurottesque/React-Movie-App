@@ -1,9 +1,11 @@
-import { Preview } from "./Preview";
+import React from 'react'
 
-function EntitySection({title}){
-    return(
-        <div>
-            
-        </div>
-   )
+const EntitySection = () => {
+  return (
+    <div>
+      
+    </div>
+  )
 }
+
+export default EntitySection
