@@ -2,14 +2,11 @@ import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useState } from "react"
 
-const movies = await MovieApi.getUpcomingMovies()
-
-
-function SearchBarPage( { title, image_path } ) {
+function SearchBarPage( { title, imgPath } ) {
     return (
         <>
             <div className="search-bar-result">
-                <img className="img-result" src={ MovieApi.getImage(image_path) }></img>
+                <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
                 <div className="title">{title}</div>
             </div>
             <div className="separator"></div>
@@ -44,7 +41,7 @@ function SearchBar() {
                                      title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
                                             r.media_type == 'tv' ? r.name : r.name}
                                      key={r.id}
-                                     image_path={r.media_type == 'person' ? r.profile_path : r.poster_path }/>
+                                     imgPath={r.media_type == 'person' ? r.profile_path : r.poster_path }/>
                 )}
 
             </div>

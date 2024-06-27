@@ -17,21 +17,13 @@ const Home = () =>{
 
 
 function App() {
-  const [inSearchPage, setinSearchPage] = useState(false)
-
   return (
     <div className='App'>
       <header>
         <nav>
-          <SearchBar/>
         </nav>
       </header>
-      <Routes>
-        <Route path = '/' element = {<Home/>}> </Route>;
-        <Route path = '/search' element = {<SearchPage/>}> </Route>;
-        <Route path = '/description' element = {<Description/>}> </Route>;
-      </Routes>
-
+    <SearchPage></SearchPage>
     </div>
   )
 }

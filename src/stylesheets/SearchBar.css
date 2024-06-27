@@ -10,6 +10,13 @@
     margin-bottom: 10px; /* Espacio entre los elementos (abajo) */  
     
 }
+
+.search-page-result {
+    display: grid;
+    grid-template-columns: 5;
+    grid-template-rows: 10;
+
+}
 .img-result {
     height: 10vh;
 }
