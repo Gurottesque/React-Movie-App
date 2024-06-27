@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { MovieApi } from './MovieApi';
 import '../stylesheets/MoviesMain.css'
@@ -30,6 +31,7 @@ const MoviesMain = () => {
       <button className='nav-button prev' onClick={handlePrev}>&lt;</button>
       {movie && (
         <>
+        <div className='contenedor-img'>
           <img 
             className='movies-main-img'
             src={MovieApi.getImage(movie.poster_path)} 
@@ -38,10 +40,14 @@ const MoviesMain = () => {
           <div className='movie-info'>
             <button className='add-button'>+</button>
             <img className='movie-card' src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
+            <img className='imagen-play'
+                src='/play_circle.png'
+            />
             <div className='movie-details'>
               <h2>{movie.title}</h2>
               <p>Watch the Trailer</p>
             </div>
+          </div>
           </div>
         </>
       )}

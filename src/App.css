@@ -22,8 +22,18 @@
 .header-nav {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 8px;
+}
+
+.search-bar input{
+    width: 200px;
+    border-radius: 5px;
+
+}
+.search-bar {
+    width: 210px;
+
 }
 
 .header {
