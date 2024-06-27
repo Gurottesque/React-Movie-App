@@ -3,7 +3,6 @@ import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 
 function ElementResults({ results }) {
-    console.log(results.title);
     return (
         <div className="container-results">
             {results.map((result) => (

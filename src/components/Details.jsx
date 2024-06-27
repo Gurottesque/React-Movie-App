@@ -9,8 +9,8 @@ const Details = ({id}) => {
   
   useEffect(() => {
     const fetchMovie = async () => {
-      const movie = await MovieApi.getMovieById(id);
-      const imgs = await MovieApi.getShowImages(id); 
+      const movie = await MovieApi.getData(`movie/${id}`, '', '');
+      const imgs = await MovieApi.getData(`movie/${id}/images`, '', ''); 
       setMovie(movie);
       setImgs(imgs);
     }
