@@ -37,7 +37,6 @@ const Details = ({id}) => {
             <p>Release Date: {movie.release_date}</p>
             <p>Runtime: {movie.runtime} minutes</p>
             <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
-            
           </div>
         </div>
       )}
