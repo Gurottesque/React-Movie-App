@@ -1,6 +1,8 @@
 import './stylesheets/App.css'
 import MoviesMain from './components/MoviesMain'
 import SearchBar from './components/SearchBar'
+import SearchPage from './components/SearchPage'
+import { useState } from 'react'
 
 const Home = () =>{
   return(
@@ -10,26 +12,17 @@ const Home = () =>{
   );
 }
 
-const SearchPage = () =>{
-  return(
-    <div>
-      <h1>Search Page</h1>
-    </div>
-  );
-}
-
 function App() {
+  const [inSearchPage, setinSearchPage] = useState(false)
+
   return (
     <div className='App'>
       <header>
         <nav>
-          <SearchBar />
+          <SearchPage />
         </nav>
       </header>
-      <Routers>
-        <Route path = '/' element = {<Home/>}> </Route>
-        <Route path = '/search' element = {<SearchPage/>}> </Route>
-      </Routers>
+      <SearchPage />
     </div>
   )
 }
