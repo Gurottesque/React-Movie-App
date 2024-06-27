@@ -1,4 +1,4 @@
-import './stylesheets/App.css';
+import './App.css';
 import SearchBar from './components/SearchBar';
 
 import { Link, Route, Routes } from 'react-router-dom';
@@ -21,9 +21,10 @@ function App() {
       </header>
       <Routes>
         <Route path = '/' element = {<Home/>} />
+
+      </Routes>  
         <Route path = '/search' element = {<SearchPage />}/>
       </Routes>    
-      <MoviesMain />
     </div>
   )
 }
