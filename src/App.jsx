@@ -2,6 +2,7 @@ import './stylesheets/App.css';
 import SearchBar from './components/SearchBar';
 import { Link } from 'react-router-dom';
 import MoviesMain from './components/MoviesMain';
+import './App.css'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <SearchBar/>
         </nav>
       </header>
-    <MoviesMain />
+      <MoviesMain />
     </div>
   )
 }
