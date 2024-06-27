@@ -34,7 +34,7 @@ export class MovieApi {
 
     static async getUpcomingMovies(page = 1) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`, {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?page=${page}`, {
                 headers: {
                     Authorization: AUTH_KEY 
                 }
@@ -55,7 +55,7 @@ export class MovieApi {
 
     static async getTrending(time, showType) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/trending/${showType}/${time}?language=en-US`, {
+            const response = await axios.get(`https://api.themoviedb.org/3/trending/${showType}/${time}`, {
                 headers: {
                     Authorization: AUTH_KEY
                 }
@@ -75,7 +75,7 @@ export class MovieApi {
 
     static async getMovieById(id) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
                 headers: {
                     Authorization: AUTH_KEY
                 }
@@ -96,7 +96,7 @@ export class MovieApi {
 
     static async getShowById(id) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}?language=en-US`, {
+            const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}`, {
                 headers: {
                     Authorization: AUTH_KEY
                 }
