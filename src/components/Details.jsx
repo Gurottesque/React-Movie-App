@@ -19,9 +19,6 @@ const Details = () => {
     fetchMovie();
 
   },[]);
-  console.log(movie)
-  console.log(imgs)
-
 
   return (
     <div className='main-details-container'>

@@ -4,12 +4,12 @@ import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 import { Link,Route } from "react-router-dom"
 
-function SearchBarPage({ title, element_id, imgPath}) {
+function SearchBarPage({ title, element_id,type, imgPath}) {
 
     return (
         <>
 
-            <Link to={`/details/${element_id}`} className="link-to-details">
+            <Link to={`/details/${type}/${element_id}`} className="link-to-details">
                 <div className="search-bar-result">
                     <img className="img-result" src={ MovieApi.getImage(imgPath) }></img>
                     <div className="title">{title}</div>
