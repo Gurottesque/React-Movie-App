@@ -4,7 +4,7 @@ import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 import { Link, Route } from "react-router-dom"
 
-function SearchBarPage({ title, element_id,type, imgPath}) {
+function SearchResults({ title, element_id,type, imgPath}) {
 
     return (
         <>
@@ -20,6 +20,15 @@ function SearchBarPage({ title, element_id,type, imgPath}) {
     );
 }
 
+function SelectSearchTypes() {
+
+    return (
+        <button className="search-glass">
+            <img src="./magnifying-glass-solid.svg" alt="search-icon" />
+        </button>
+    )
+
+}
 function SearchBar() {
     const [results, setResults] = useState([]);
 
@@ -33,7 +42,7 @@ function SearchBar() {
     return (
         <div className="search-bar">
             <div className="search-input">
-            <input type="text" placeholder="Buscar en IMDb" onChange={saveInput} />
+            <input type="text" placeholder="Buscar..." onChange={saveInput} />
             <button className="search-glass">
                 <img src="./magnifying-glass-solid.svg" alt="search-icon" />
             </button>
@@ -44,7 +53,7 @@ function SearchBar() {
 
                 {results.map(r => 
                     
-                    <SearchBarPage
+                    <SearchResults
                                     title={r.media_type == 'movie' || r.media_type == 'collection' ? r.title :
                                             r.media_type == 'tv' ? r.name : r.name}
                                     key={r.id}

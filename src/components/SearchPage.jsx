@@ -2,19 +2,16 @@ import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 
-function ElementResults({ results, type }) {
+function ElementResults({ results, isFilterActive }) {
 
-    let nameHandler;
-
-    if (type.length == 0) { nameHandler = 0 }
-    else { nameHandler = 1 }
 
     return (
         <div className="container-results">
             {results.map((result) => (
                 <div key={result.id}>
                     <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
-                    {nameHandler == 0 ? <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> : <h2>{result.title}</h2>}
+                    {isFilterActive ?  <h2>{result.title}</h2>
+                                    : <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> }
                     <div>⭐{result.vote_average}</div>
                 </div>
             ))}
@@ -24,8 +21,10 @@ function ElementResults({ results, type }) {
 }
 
 function Genre({ name, onClickHandler }) {
+
+    const [isSelected, setisSelected] = useState(false)
     return (
-        <button onClick={onClickHandler}>{name}</button>
+        <button style={{backgroundColor: isSelected ? 'green' : 'white' }}onClick={() => {onClickHandler(); setisSelected(!isSelected)}}>{name}</button>
     )
 }
 
@@ -34,6 +33,7 @@ function SearchPage() {
     const [inputValue, setInputValue] = useState('');
     const [genresFilter, setGenresFilter] = useState([]);
     const [genres, setGenres] = useState([]);
+    const [isFilterActive, setisFilterActive] = useState(false)
 
     useEffect(() => {
         async function fetchGenres() {
@@ -71,6 +71,7 @@ function SearchPage() {
         setGenresFilter(prev => 
             prev.includes(genreId) ? prev.filter(id => id !== genreId) : [...prev, genreId]
         );
+        setisFilterActive(true);
     };
 
     return (
@@ -87,11 +88,11 @@ function SearchPage() {
                 />
             </div>
             <div className="results-container">
-                <ElementResults results={results} type={genresFilter}/>
+                <ElementResults results={results} isFilterActive={isFilterActive}/>
             </div>
             <div className="filters">
                 {genres.map((genre) => (
-                    <Genre key={genre.id} name={genre.name} onClickHandler={() => filterSearch(genre.id)} />
+                    <Genre key={genre.id} name={genre.name} onClickHandler={() => filterSearch(genre.id)}  />
                 ))}
             </div>
         </>
