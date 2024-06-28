@@ -8,20 +8,18 @@ const Details = () => {
   const [movie, setMovie] = useState(null);
   const [imgs, setImgs] = useState(null);
   const {id} = useParams();
+  const {type} = useParams();
   
   useEffect(() => {
     const fetchMovie = async () => {
-      const movie = await MovieApi.getData(`movie/${id}`, '', '');
-      const imgs = await MovieApi.getData(`movie/${id}/images`, '', ''); 
+      const movie = await MovieApi.getData(`${type}/${id}`, '', '');
+      const imgs = await MovieApi.getData(`${type}/${id}/images`, '', ''); 
       setMovie(movie);
       setImgs(imgs);
     }
     fetchMovie();
 
   },[]);
-  console.log(movie)
-  console.log(imgs)
-
 
   return (
     <div className='main-details-container'>
