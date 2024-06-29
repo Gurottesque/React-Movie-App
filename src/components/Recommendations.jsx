@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MovieApi } from './MovieApi';
 import '../stylesheets/Recommendations.css';
+import { Link } from 'react-router-dom';
 
 const Recommendations = () => {
   const [movies, setMovies] = useState([]);
@@ -38,11 +39,13 @@ const Recommendations = () => {
       <div className="movies-grid-r">
         {selectedMovies.map((movie) => (
           <div key={movie.id} className="movie-card-r">
-            <img src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
-            <div className="movie-info-r">
-              <h3>{movie.title}</h3>
-              <p>{movie.vote_average}</p>
-            </div>
+            <Link to={`/details/movie/${movie.id}`}>
+              <img src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
+              <div className="movie-info-r">
+                <h3>{movie.title}</h3>
+                <p>{movie.vote_average}</p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
