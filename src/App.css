@@ -39,3 +39,27 @@
 .header {
     background-color: #111111;
 }
+
+.footer{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    flex-wrap: wrap;
+    font-size: small;
+}
+
+
+.footer-container >*{
+    display: flex;
+    justify-content: center;
+}
+
+.condiciones{
+    gap: 2rem;
+}
+.authors{
+    gap: 2rem;
+}
+
+

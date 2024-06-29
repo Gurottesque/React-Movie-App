@@ -23,7 +23,25 @@ function App() {
         <Route path = '/' element = {<Home/>} /> 
         <Route path = '/search' element = {<SearchPage />}/>
         <Route path = '/details/:type/:id' element={<Details/>} />
-      </Routes>    
+      </Routes>
+      <footer className='footer'>
+        <div className='footer-container'>
+          <div className='condiciones'>
+            <p>Ayuda</p>
+            <p>Indice del sitio</p>
+            <p>Condiciones de uso</p>
+            <p>Politicas de privacidad</p>
+          </div>
+          <div className='authors'>
+            <h3>Autores:</h3>
+            <p>Angel Andres Bedoya</p>
+            <p>David Londoño</p>
+            <p>Nicolas Vega</p>
+            <p>Juan Gomeez</p>
+          </div>
+          <p className='bootcamp'><strong>EliteStacks</strong></p>
+        </div>
+      </footer>    
     </div>
   )
 }

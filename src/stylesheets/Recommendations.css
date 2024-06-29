@@ -58,25 +58,3 @@
     right: 24px;
     bottom: 270px;
   }
-
-  .foother{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .condiciones{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-  }
-  .nombresG{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-  }
-  .bootcamp{
-    text-align: center;
-  }

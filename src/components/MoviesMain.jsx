@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { MovieApi } from './MovieApi';
-import '../stylesheets/MoviesMain.css'
+import '../stylesheets/MoviesMain.css';
 
 const MoviesMain = () => {
   const [movie, setMovie] = useState(null);
@@ -27,6 +27,7 @@ const MoviesMain = () => {
   };
 
   return (
+
     <div className='movies-main-container'>
       <button className='nav-button prev' onClick={handlePrev}>&lt;</button>
       {movie && (
