@@ -1,7 +1,7 @@
 import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
-
+import { useLocation } from "react-router-dom"
 function ElementResults({ results, isFilterActive }) {
 
 
@@ -28,30 +28,11 @@ function Genre({ name, onClickHandler }) {
     )
 }
 
-function SearchPage() {
+const useSearch = (initialQuery) => {
     const [results, setResults] = useState([]);
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(initialQuery);
     const [genresFilter, setGenresFilter] = useState([]);
-    const [genres, setGenres] = useState([]);
-    const [isFilterActive, setisFilterActive] = useState(false)
-
-    useEffect(() => {
-        async function fetchGenres() {
-            const genres = await MovieApi.getGenres();
-            setGenres(genres);
-        }
-        fetchGenres();
-    }, []);
-
-    useEffect(() => {
-        handleSearch(inputValue);
-    }, [genresFilter]);
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            handleSearch(inputValue);
-        }
-    };
+    const [isFilterActive, setIsFilterActive] = useState(false);
 
     const handleSearch = async (queryString) => {
         if (genresFilter.length === 0) {
@@ -63,16 +44,68 @@ function SearchPage() {
         }
     };
 
+    useEffect(() => {
+        handleSearch(inputValue);
+    }, [genresFilter, initialQuery]);
+
     const handleChange = (event) => {
         setInputValue(event.target.value);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch(inputValue);
+        }
     };
 
     const filterSearch = (genreId) => {
         setGenresFilter(prev => 
             prev.includes(genreId) ? prev.filter(id => id !== genreId) : [...prev, genreId]
         );
-        setisFilterActive(true);
+        setIsFilterActive(true);
     };
+
+    return {
+        results,
+        inputValue,
+        handleChange,
+        handleKeyDown,
+        filterSearch,
+        isFilterActive
+    };
+};
+
+
+const useGenres = () => {
+    const [genres, setGenres] = useState([]);
+
+    useEffect(() => {
+        async function fetchGenres() {
+            const genres = await MovieApi.getGenres();
+            setGenres(genres);
+        }
+        fetchGenres();
+    }, []);
+
+    return genres;
+};
+
+
+function SearchPage() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const query = queryParams.get('query');
+
+    const {
+        results,
+        inputValue,
+        handleChange,
+        handleKeyDown,
+        filterSearch,
+        isFilterActive
+    } = useSearch(query);
+
+    const genres = useGenres();
 
     return (
         <>
@@ -98,5 +131,6 @@ function SearchPage() {
         </>
     );
 }
+
 
 export default SearchPage;

@@ -1,6 +1,6 @@
 import { MovieApi } from "./MovieApi.js"
 import { useEffect, useState } from "react"
-import { Link, Route } from "react-router-dom"
+import { Link, Route, useNavigate } from "react-router-dom"
 import "../stylesheets/SearchBar.css"
 
 /* 
@@ -9,7 +9,9 @@ import "../stylesheets/SearchBar.css"
 */
 function SearchBar() {
     const {
-        results, setInputValue,
+        results, 
+        inputValue,
+        setInputValue,
         typeSearch, setTypeSearch,
         focus, setFocus
     } = useSearch(); // Custom Hook para realizar las operaciones de busqueda, tipado y foco
@@ -36,7 +38,7 @@ function SearchBar() {
                                 {/* Se da un tiempo antes de desaparecer por que al entrar a uno de los resultados, desrenderiza antes de la redireccion*/}
 
             {/* Renderizar componente SearchInput, corresponde al lugar donde el usuario escribe */}
-            <SearchInput handleInputChange={handleInputChange} />
+            <SearchInput handleInputChange={handleInputChange} query={inputValue} />
 
             {/* Renderizar componente SelectMediaTypes, usado para que el usuario seleccione
                 entre buscar por peliculas, show, personas o todo
@@ -74,13 +76,22 @@ export default SearchBar;
     Encargado de renderizar el input y actualizar el estado 'inputValue' al escuchar el evento "onChange" que se activa cuando el usuario escribe en el input.
 */
 
-function SearchInput({ handleInputChange }){
+function SearchInput({ handleInputChange, query }){
+    const navigate = useNavigate();
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        navigate(`/search?query=${encodeURIComponent(query)}`);
+      }
+    };
+
     return (
         <div className="search-input">
             <input
                 type="text"
                 placeholder="Buscar..."
                 onChange={handleInputChange}
+                onKeyDown={(e) => {handleKeyDown(e)}  }
 
             />
         </div>
@@ -228,6 +239,7 @@ function useSearch() {
 
     return {
         results,
+        inputValue,
         setInputValue,
         typeSearch,
         setTypeSearch,
