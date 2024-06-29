@@ -1,8 +1,7 @@
 import { MovieApi } from "./MovieApi.js"
-import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
 import { Link, Route } from "react-router-dom"
-
+import "../stylesheets/SearchBar.css"
 
 /* 
     Componente SearchBar
@@ -10,12 +9,9 @@ import { Link, Route } from "react-router-dom"
 */
 function SearchBar() {
     const {
-        results,
-        setInputValue,
-        typeSearch,
-        setTypeSearch,
-        focus,
-        setFocus,
+        results, setInputValue,
+        typeSearch, setTypeSearch,
+        focus, setFocus
     } = useSearch(); // Custom Hook para realizar las operaciones de busqueda, tipado y foco
 
     // Función para actualizar la entrada de datos 'input' cada vez que el usuario escribe
@@ -36,7 +32,8 @@ function SearchBar() {
         // Eventos establecidos para desaparecer la barra de resultados cuando el usuario
         // mueve su mouse fuera de la zona de la barra de busqueda
             onMouseEnter={() => setFocus(true)} 
-            onMouseLeave={() => setTimeout(() => setFocus(false), 100)}>
+            onMouseLeave={() => setTimeout(() => setFocus(false), 100)}> 
+                                {/* Se da un tiempo antes de desaparecer por que al entrar a uno de los resultados, desrenderiza antes de la redireccion*/}
 
             {/* Renderizar componente SearchInput, corresponde al lugar donde el usuario escribe */}
             <SearchInput handleInputChange={handleInputChange} />
@@ -74,11 +71,10 @@ export default SearchBar;
 
 /*
     Componente SearchInput:
-    Encargado de renderizar el input y actualizar los valores de 'inputValue' en el customHook
-    al escuchar el evento "onChange" que se activa al usuario escribir en el input
+    Encargado de renderizar el input y actualizar el estado 'inputValue' al escuchar el evento "onChange" que se activa cuando el usuario escribe en el input.
 */
 
-const SearchInput = ({ handleInputChange }) => {
+function SearchInput({ handleInputChange }){
     return (
         <div className="search-input">
             <input
@@ -93,14 +89,14 @@ const SearchInput = ({ handleInputChange }) => {
 
 
 /*
-    Componente SelectMediaTipes:
+    Componente SelectMediaTypes:
     Encargado de renderizar los tipos de filtro por el que se puede buscar (movie, tv, people, all)
     Recibe el handler por el cual cada uno de los filtros aplicará al estado "showMediaTypes"
 */
 
 function SelectMediaTypes({selectMediaHandler}) { 
 
-    // Estado usado para desaparecer la eleccion al usuario dar click de nuevo
+    // Estado booleano usado para borrar la eleccion del usuario al dar click de nuevo a una de las elecciones
     const [showMediaTypes, setShowMediaTypes] = useState(false); 
 
 
@@ -139,7 +135,7 @@ function SelectMediaTypes({selectMediaHandler}) {
     como un Array de objetos el cual itera en él para renderizar cada uno, el foco y el tipo de busqueda
 */
 
-const SearchResultsList = ({ results, focus, typeSearch }) => {
+function SearchResultsList({ results, focus, typeSearch }){
     return (
         <div className="results-searchbar">
 
@@ -197,7 +193,7 @@ function SearchResults({ title, element_id, type, imgPath,}) {
     Custom hook encargado de hacer el llamado a la api, administrar los estados de resultado, los inputs digitados, el tipo de busqueda y el foco
 */
 
-const useSearch = () => {
+function useSearch() {
 
     /*
         Estados:
