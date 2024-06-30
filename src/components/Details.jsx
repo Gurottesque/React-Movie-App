@@ -7,9 +7,8 @@ import '../stylesheets/Details.css'
 const Details = () => {
   const [movie, setMovie] = useState(null);
   const [imgs, setImgs] = useState(null);
-  const {id} = useParams();
-  const {type} = useParams();
-  
+  const {id, type} = useParams();
+ 
   useEffect(() => {
     const fetchMovie = async () => {
       const movie = await MovieApi.getData(`${type}/${id}`, '', '');

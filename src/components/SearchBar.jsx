@@ -177,7 +177,7 @@ function SearchResultsList({ results, focus, typeSearch }){
     Encargado de renderizar cada resultado individual y hacer el enrutamiento correspondiente hasta la pagina de detalles
 */
 
-function SearchResults({ title, element_id, type, imgPath,}) {
+function SearchResults({ title, element_id, type, imgPath}) {
     return (
         <>
             {/* Enrutamiento al hacer click */}
