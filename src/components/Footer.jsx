@@ -12,7 +12,7 @@ function Footer(){
                     </div>
             <div className="integrantes">
                     <p href="#">Angel Andres Bedoya</p>
-                    <p href="#">avid londoño</p>
+                    <p href="#">David Londoño</p>
                     <p href="#">Nicolas Vega</p>
                     <p href="#">Juan Carlos Gomez</p>
             </div>  
