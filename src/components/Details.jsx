@@ -5,37 +5,43 @@ import '../stylesheets/Details.css'
 
 
 const Details = () => {
-  const [movie, setMovie] = useState(null);
+  const [detail, setDetail] = useState(null);
   const [imgs, setImgs] = useState(null);
   const {id, type} = useParams();
  
   useEffect(() => {
     const fetchMovie = async () => {
-      const movie = await MovieApi.getData(`${type}/${id}`, '', '');
+      const detail = await MovieApi.getData(`${type}/${id}`, '', '');
       const imgs = await MovieApi.getData(`${type}/${id}/images`, '', ''); 
-      setMovie(movie);
+      setDetail(detail);
       setImgs(imgs);
+      console.log(detail)
+      console.log(detail.gender != undefined )
     }
     fetchMovie();
 
   },[]);
 
   return (
+    
     <div className='main-details-container'>
-      {movie && (
+      {
+        detail.gender !=
+      }
+      {detail && (
         <div className='details-container'>
-            <h1>{movie.title}</h1>
+            <h1>{detail.title}</h1>
             <div className='details-img'>
               <img 
-                src={MovieApi.getImage(movie.poster_path)} 
-                alt={movie.title} 
+                src={MovieApi.getImage(detail.poster_path)} 
+                alt={detail.title} 
               />
             </div>
-            <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
-            <p>{movie.overview}</p>
-            <p>Rating: {movie.vote_average}</p>
-            <p>Release Date: {movie.release_date}</p>
-            <p>Runtime: {movie.runtime} minutes</p>
+            <p>{detail.genres.map(genre => genre.name).join(', ')}</p>
+            <p>{detail.overview}</p>
+            <p>Rating: {detail.vote_average}</p>
+            <p>Release Date: {detail.release_date}</p>
+            <p>Runtime: {detail.runtime} minutes</p>
         </div>
       )}
     </div>

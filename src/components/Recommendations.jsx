@@ -20,6 +20,7 @@ const Recommendations = () => {
     fetchMovies();
   }, []);
 
+
   const moviesPerPage = 6;
   const totalPages = Math.ceil(movies.length / moviesPerPage);
 
