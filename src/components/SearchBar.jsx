@@ -120,7 +120,7 @@ function SelectMediaTypes({selectMediaHandler}) {
         
         TO-DO: Modificar el CSS de este boton para hacerlo mas estilizado 
         */}
-        <button className="search-glass search-nav" onClick={renderMediaTypes} />
+        <button className="media-class" onClick={renderMediaTypes} />
 
         {/* Condicional de renderizado, si "showMediaTypes" es true, se renderizarán los botones
             se usa el operador "&&" (Logico and)
