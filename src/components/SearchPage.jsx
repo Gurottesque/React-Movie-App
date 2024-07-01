@@ -1,7 +1,7 @@
 import { MovieApi } from "./MovieApi.js";
 import "../stylesheets/SearchBar.css";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ITEM_POR_PAGINA = 9;
 
@@ -33,6 +33,7 @@ function ElementResults({ results, isFilterActive }) {
             <div className="container-results">
                 {items.map((item) => (
                     <div className="cont-info" key={item.id}>
+                        <Link to={`/details/${item.media_type || "movie"}/${item.id}`}>
                         <img
                             className="img-search"
                             src={MovieApi.getImage(item.poster_path)}
@@ -42,6 +43,7 @@ function ElementResults({ results, isFilterActive }) {
                             {isFilterActive? item.title: item.media_type === "movie" ||item.media_type === "collection" ? item.title: item.name}
                         </h2>
                         <div>⭐{item.vote_average}</div>
+                        </Link>
                     </div>
                 ))}
             </div>
