@@ -6,7 +6,7 @@ import '../stylesheets/MoviesMain.css'
 
 const MoviesMain = () => {
     const[content, setContent] = useState();
-    const[index, setIndex] = useState(1);
+    const[index, setIndex] = useState(0);
 
     useEffect(() => {
         const fetchContent = async () => {
@@ -42,7 +42,7 @@ const MoviesMain = () => {
                         <img className='movie-card' src={MovieApi.getImage(content[index].poster_path)} alt={content[index].title} />
                         <img className='imagen-play'src='/play2.svg'/>
                         <div className='movie-details'>
-                            <h2>{content[index].title}</h2>
+                            <h2>{content[index].media_type == "tv"? content[index].name : content[index].title}</h2>
                             <p>Watch the Trailer</p>
                         </div>
                     </div>
