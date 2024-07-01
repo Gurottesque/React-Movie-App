@@ -12,4 +12,4 @@ To run the app use
 
 ` npm run dev `
 
-Otherwise, the page is hosted in:
+Otherwise, the page is hosted in: https://movies2-app.netlify.app
