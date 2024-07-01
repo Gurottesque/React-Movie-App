@@ -82,12 +82,13 @@ const Details = () => {
                 }}
               >
                 <h1>{detail.title}</h1>
-              </div>
-              <div className="details-img">
-                <img
-                  src={MovieApi.getImage(detail.poster_path)}
-                  alt={detail.title}
-                />
+
+                <div className="details-img">
+                  <img
+                    src={MovieApi.getImage(detail.poster_path)}
+                    alt={detail.title}
+                  />
+                </div>
               </div>
               <p>
                 Genres: {detail.genres.map((genre) => genre.name).join(", ")}

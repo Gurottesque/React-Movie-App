@@ -1,58 +1,59 @@
 
 import { useState, useEffect } from 'react'
 import { MovieApi } from './MovieApi';
+import { Link } from 'react-router-dom'
 import '../stylesheets/MoviesMain.css'
 
 const MoviesMain = () => {
-  const [movie, setMovie] = useState(null);
-  const [imageIndex, setImageIndex] = useState(0);
+    const[content, setContent] = useState();
+    const[index, setIndex] = useState(1);
 
-  const movieIds = [603, 504, 200, 345];
+    useEffect(() => {
+        const fetchContent = async () => {
+            const contentData = await MovieApi.getData(`trending/all/day`,'','');
+            setContent(contentData.results);
+            console.log(contentData.results);
+        };
+        fetchContent();
+    },[])
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-        const movieData = await MovieApi.getData(`movie/${movieIds[imageIndex]}`,'','');
-        setMovie(movieData);
+    const handlePrev = () => {
+        setIndex((prevIndex) => (prevIndex - 1 + content.length) % content.length);
     };
 
-    fetchMovie();
-  }, [imageIndex]);
+    const handleNext = () => {
+        setIndex((prevIndex) => (prevIndex + 1) % content.length);
+    };
 
-  const handlePrev = () => {
-    setImageIndex((prevIndex) => (prevIndex - 1 + movieIds.length) % movieIds.length);
-  };
+    return(
+        <div className='movies-main-container'>
+            <button className='nav-button prev' onClick={handlePrev}><img src="./flecha-izq.svg" alt="" /></button>
+            {content && (
+                <>
+                <Link to={`/details/${content[index].seasons? 'tv':'movie'}/${content[index].id}`} className='movie-link'>
+                <div className='contenedor-img'>
+                    <img 
+                        className='movies-main-img'
+                        src={MovieApi.getImage(content[index].backdrop_path)} 
+                        alt={content[index].title} 
+                    />
+                    <div className='movie-info'>
+                        <button className='add-button'>+</button>
+                        <img className='movie-card' src={MovieApi.getImage(content[index].poster_path)} alt={content[index].title} />
+                        <img className='imagen-play'src='/play2.svg'/>
+                        <div className='movie-details'>
+                            <h2>{content[index].title}</h2>
+                            <p>Watch the Trailer</p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+                </>
+            )}
+            <button className='nav-button next' onClick={handleNext}><img src="./flecha-der.svg" alt="" /></button>
+        </div>
+    )
 
-  const handleNext = () => {
-    setImageIndex((prevIndex) => (prevIndex + 1) % movieIds.length);
-  };
-
-  return (
-    <div className='movies-main-container'>
-      <button className='nav-button prev' onClick={handlePrev}><img src="./flecha-izq.svg" alt="" /></button>
-      {movie && (
-        <>
-        <div className='contenedor-img'>
-          <img 
-            className='movies-main-img'
-            src={MovieApi.getImage(movie.poster_path)} 
-            alt={movie.title} 
-          />
-          <div className='movie-info'>
-            <button className='add-button'>+</button>
-            <img className='movie-card' src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
-            <img className='imagen-play'src='/play2.svg'/>
-            <div className='movie-details'>
-              <h2>{movie.title}</h2>
-              <p>Watch the Trailer</p>
-            </div>
-          </div>
-          </div>
-        </>
-      )}
-      <button className='nav-button next' onClick={handleNext}><img src="./flecha-der.svg" alt="" /></button>
-    </div>
-  )
 }
 
 export default MoviesMain
-

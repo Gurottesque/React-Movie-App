@@ -8,3 +8,7 @@
     height: 350px;
     border-radius: 12px;
 }
+
+.title-background{
+    background-size: cover;
+}

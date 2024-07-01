@@ -1,5 +1,4 @@
 import MoviesMain from './MoviesMain'
-import Recommendations from './Recommendations';
 import Carrusel1 from './Carrusel1'
 import '../stylesheets/Home.css'
 import Footer from '../components/Footer'
