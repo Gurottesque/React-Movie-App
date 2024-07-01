@@ -19,8 +19,8 @@ const Recommendations = () => {
     fetchMovies();
   }, []);
 
-  const moviesPerPage = 6;
-  const totalPages = Math.ceil(movies.length / moviesPerPage);
+  const moviesPerPage = 12;
+  const totalPages = 1;
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));

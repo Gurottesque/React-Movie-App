@@ -1,7 +1,8 @@
 import { MovieApi } from "./MovieApi.js"
-import { useEffect, useState } from "react"
-import { Link, Route, useNavigate } from "react-router-dom"
 import "../stylesheets/SearchBar.css"
+import { useEffect, useState } from "react"
+import { Link, Route } from "react-router-dom"
+
 
 /* 
     Componente SearchBar
@@ -9,11 +10,12 @@ import "../stylesheets/SearchBar.css"
 */
 function SearchBar() {
     const {
-        results, 
-        inputValue,
+        results,
         setInputValue,
-        typeSearch, setTypeSearch,
-        focus, setFocus
+        typeSearch,
+        setTypeSearch,
+        focus,
+        setFocus,
     } = useSearch(); // Custom Hook para realizar las operaciones de busqueda, tipado y foco
 
     // Función para actualizar la entrada de datos 'input' cada vez que el usuario escribe
@@ -34,11 +36,10 @@ function SearchBar() {
         // Eventos establecidos para desaparecer la barra de resultados cuando el usuario
         // mueve su mouse fuera de la zona de la barra de busqueda
             onMouseEnter={() => setFocus(true)} 
-            onMouseLeave={() => setTimeout(() => setFocus(false), 100)}> 
-                                {/* Se da un tiempo antes de desaparecer por que al entrar a uno de los resultados, desrenderiza antes de la redireccion*/}
+            onMouseLeave={() => setTimeout(() => setFocus(false), 100)}>
 
             {/* Renderizar componente SearchInput, corresponde al lugar donde el usuario escribe */}
-            <SearchInput handleInputChange={handleInputChange} query={inputValue} />
+            <SearchInput handleInputChange={handleInputChange} />
 
             {/* Renderizar componente SelectMediaTypes, usado para que el usuario seleccione
                 entre buscar por peliculas, show, personas o todo
@@ -73,25 +74,17 @@ export default SearchBar;
 
 /*
     Componente SearchInput:
-    Encargado de renderizar el input y actualizar el estado 'inputValue' al escuchar el evento "onChange" que se activa cuando el usuario escribe en el input.
+    Encargado de renderizar el input y actualizar los valores de 'inputValue' en el customHook
+    al escuchar el evento "onChange" que se activa al usuario escribir en el input
 */
 
-function SearchInput({ handleInputChange, query }){
-    const navigate = useNavigate();
-
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-        navigate(`/search?query=${encodeURIComponent(query)}`);
-      }
-    };
-
+const SearchInput = ({ handleInputChange }) => {
     return (
         <div className="search-input">
             <input
                 type="text"
                 placeholder="Buscar..."
                 onChange={handleInputChange}
-                onKeyDown={(e) => {handleKeyDown(e)}  }
 
             />
         </div>
@@ -100,14 +93,14 @@ function SearchInput({ handleInputChange, query }){
 
 
 /*
-    Componente SelectMediaTypes:
+    Componente SelectMediaTipes:
     Encargado de renderizar los tipos de filtro por el que se puede buscar (movie, tv, people, all)
     Recibe el handler por el cual cada uno de los filtros aplicará al estado "showMediaTypes"
 */
 
 function SelectMediaTypes({selectMediaHandler}) { 
 
-    // Estado booleano usado para borrar la eleccion del usuario al dar click de nuevo a una de las elecciones
+    // Estado usado para desaparecer la eleccion al usuario dar click de nuevo
     const [showMediaTypes, setShowMediaTypes] = useState(false); 
 
 
@@ -123,7 +116,7 @@ function SelectMediaTypes({selectMediaHandler}) {
         
         TO-DO: Modificar el CSS de este boton para hacerlo mas estilizado 
         */}
-        <button className="search-glass" onClick={renderMediaTypes} />
+        <button className="search-glass search-nav" onClick={renderMediaTypes} />
 
         {/* Condicional de renderizado, si "showMediaTypes" es true, se renderizarán los botones
             se usa el operador "&&" (Logico and)
@@ -146,7 +139,7 @@ function SelectMediaTypes({selectMediaHandler}) {
     como un Array de objetos el cual itera en él para renderizar cada uno, el foco y el tipo de busqueda
 */
 
-function SearchResultsList({ results, focus, typeSearch }){
+const SearchResultsList = ({ results, focus, typeSearch }) => {
     return (
         <div className="results-searchbar">
 
@@ -204,7 +197,7 @@ function SearchResults({ title, element_id, type, imgPath,}) {
     Custom hook encargado de hacer el llamado a la api, administrar los estados de resultado, los inputs digitados, el tipo de busqueda y el foco
 */
 
-function useSearch() {
+const useSearch = () => {
 
     /*
         Estados:
@@ -239,7 +232,6 @@ function useSearch() {
 
     return {
         results,
-        inputValue,
         setInputValue,
         typeSearch,
         setTypeSearch,
