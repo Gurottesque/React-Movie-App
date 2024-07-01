@@ -8,6 +8,7 @@ function ElementResults({ results, isFilterActive }) {
     return (
         <div className="container-results">
             {results.map((result) => (
+
                 <Link to={`/details/${result.media_type || 'movie'}/${result.id}`} >
                     <div key={result.id}>
                         <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
@@ -16,6 +17,7 @@ function ElementResults({ results, isFilterActive }) {
                         <div>⭐{result.vote_average}</div>
                     </div>
                 </Link>
+
             ))}
         </div>
     );
@@ -111,9 +113,7 @@ function SearchPage() {
 
     return (
         <>
-            <div className='search-bar'>
-                <button className="select-showtypes">
-                </button>
+            <div className='search-bar busquedaSec'>
                 <input
                     type="text"
                     value={inputValue}
