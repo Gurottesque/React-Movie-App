@@ -5,17 +5,20 @@ import '../stylesheets/Details.css'
 
 
 const Details = () => {
-  const [movie, setMovie] = useState(null);
+  const [detail, setDetail] = useState(null);
   const [imgs, setImgs] = useState(null);
   const {id} = useParams();
   const {type} = useParams();
   
   useEffect(() => {
     const fetchMovie = async () => {
-      const movie = await MovieApi.getData(`${type}/${id}`, '', '');
+      const detail = await MovieApi.getData(`${type}/${id}`, '', '');
       const imgs = await MovieApi.getData(`${type}/${id}/images`, '', ''); 
-      setMovie(movie);
+      setDetail(detail);
       setImgs(imgs);
+      console.log(detail.gender !== undefined) //Personas
+      console.log(detail.seassons != undefined) //Series
+
     }
     fetchMovie();
 
@@ -23,22 +26,31 @@ const Details = () => {
 
   return (
     <div className='main-details-container'>
-      {movie && (
-        <div className='details-container'>
-            <h1>{movie.title}</h1>
-            <div className='details-img'>
-              <img 
-                src={MovieApi.getImage(movie.poster_path)} 
-                alt={movie.title} 
-              />
-            </div>
-            <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
-            <p>{movie.overview}</p>
-            <p>Rating: {movie.vote_average}</p>
-            <p>Release Date: {movie.release_date}</p>
-            <p>Runtime: {movie.runtime} minutes</p>
-        </div>
-      )}
+      <div className='details-container'>
+        {detail.gender !== undefined? (//Persons
+            <>
+              <h1>{detail.name}</h1>
+              <div className='details-img'>
+                <img 
+                  src={MovieApi.getImage(detail.profile_path)} 
+                  alt={detail.name} 
+                />
+              </div>
+              <p>Biography: {detail.overview}</p>
+              <p>Popularity: {detail.popularity}</p>
+              <p>Birthday: {detail.birthday}</p>
+              <p>Place of birth: {detail.place_of_birth}</p>
+              <p>Know for: {detail.know_for_department}</p>
+            </>
+        ): detail.seassons !== undefined?({
+
+        }
+
+        ): ({
+          
+        })
+        }
+       </div>
     </div>
   )
 }

@@ -37,7 +37,6 @@ export class MovieApi {
                     Authorization: `Bearer ${AUTH_KEY}`
                 }
             });
-            console.log(url.toString())
             return response.data;
         } catch (error) {
             console.log(error);
