@@ -20,7 +20,7 @@ const Details = () => {
       console.log(detail.seassons != undefined); //Series
     };
     fetchMovie();
-  }, [id, type]);
+  }, [type,id]);
 
   return (
     <div className="main-details-container">

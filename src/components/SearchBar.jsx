@@ -52,9 +52,13 @@ function SearchBar() {
             <SearchResultsList results={results} focus={focus} typeSearch={typeSearch} />
             
             {/* TO DO: Boton de busqueda, al dar click dirigir a /search con las keywords apropiadas */}
+            <Link to={`/search`} className="search-button">
             <button className="search-glass">
                 <img src="./magnifying-glass-solid.svg" alt="search-icon" />
             </button>
+            </Link>
+
+            
         </div>
     );
 }
