@@ -30,7 +30,7 @@ const MoviesMain = () => {
             <button className='nav-button prev' onClick={handlePrev}><img src="./flecha-izq.svg" alt="" /></button>
             {content && (
                 <>
-                <Link to={`/details/${content[index].seasons? 'tv':'movie'}/${content[index].id}`} className='movie-link'>
+                <Link to={`/details/${content[index].media_type == "tv" ? 'tv':'movie'}/${content[index].id}`} className='movie-link'>
                 <div className='contenedor-img'>
                     <img 
                         className='movies-main-img'
