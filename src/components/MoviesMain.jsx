@@ -28,7 +28,7 @@ const MoviesMain = () => {
 
   return (
     <div className='movies-main-container'>
-      <button className='nav-button prev' onClick={handlePrev}>&lt;</button>
+      <button className='nav-button prev' onClick={handlePrev}><img src="./flecha-izq.svg" alt="" /></button>
       {movie && (
         <>
         <div className='contenedor-img'>
@@ -40,9 +40,7 @@ const MoviesMain = () => {
           <div className='movie-info'>
             <button className='add-button'>+</button>
             <img className='movie-card' src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
-            <img className='imagen-play'
-                src='/play_circle.png'
-            />
+            <img className='imagen-play'src='/play2.svg'/>
             <div className='movie-details'>
               <h2>{movie.title}</h2>
               <p>Watch the Trailer</p>
@@ -51,9 +49,10 @@ const MoviesMain = () => {
           </div>
         </>
       )}
-      <button className='nav-button next' onClick={handleNext}>&gt;</button>
+      <button className='nav-button next' onClick={handleNext}><img src="./flecha-der.svg" alt="" /></button>
     </div>
   )
 }
 
 export default MoviesMain
+
