@@ -24,9 +24,8 @@ const Recommendations = ({ tipo }) => {
 
   return (
     <div className="recommendations-container-r">
-      <button className="nav-button2 prev2">
-        <img src="./flecha-izq.svg" alt="" />
-      </button>
+        <img className="flecha" src="./flecha-izq.svg" alt="" />
+  
       <motion.div className="movies-grid-r">
         <motion.div
           className="slider"
@@ -57,11 +56,10 @@ const Recommendations = ({ tipo }) => {
           ))}
         </motion.div>
       </motion.div>
-      <button className="nav-button2 next2">
-        <img src="./flecha-der.svg" alt="" />
-      </button>
+        <img className="flecha" src="./flecha-der.svg" alt="" />
     </div>
   );
 };
 
 export default Recommendations;
+
