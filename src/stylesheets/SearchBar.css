@@ -21,6 +21,10 @@
     
 }
 
+.media-class {
+    width: 10px;
+    height: 5px;
+}
 .search-input {
     display: flex;
 }
