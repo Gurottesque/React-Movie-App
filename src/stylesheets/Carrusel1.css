@@ -48,46 +48,6 @@
   left: 30%;
 }
 
-.nav-button2 {
-  height: 120px;
-  width: 60px;
-  background-color: #1a1a1a99;
-  color: #fff;
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 1.2em;
-  transform: translateY(-50%);
-  border: 1px solid #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  position: relative;
-  bottom: 20px;
-}
-
-.nav-button2 img{
-  width: 50px;
-    height: 70px;
-    padding: 0;
-}
-
- .next2{
-  margin-left: 10px;
-
-}
-
-.next2 img{
-  position: relative;
-  right: 10px;
-}
-.prev2 img{
-  position: relative;
-  right: 10px;
-}
-
-.prev2{
-  margin-right: 10px;
-}
 .votos{
   display: flex;
   position: relative;
@@ -97,6 +57,11 @@
   height: 30px;
   position: relative;
   top: 12px;
+}
+
+.flecha{
+  position: relative;
+  bottom: 100px;
 }
 
 
