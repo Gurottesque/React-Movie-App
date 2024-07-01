@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { MovieApi } from './MovieApi';
-import '../stylesheets/Recommendations.css';
+import { useState, useEffect } from "react";
+import { MovieApi } from "./MovieApi";
+import "../stylesheets/Recommendations.css";
 
 const Recommendations = () => {
   const [movies, setMovies] = useState([]);
@@ -9,11 +9,15 @@ const Recommendations = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const trendingMovies = await MovieApi.getData('trending/movie/week', '','');
-        console.log(trendingMovies.results)
+        const trendingMovies = await MovieApi.getData(
+          "trending/movie/week",
+          "",
+          ""
+        );
+        console.log(trendingMovies.results);
         setMovies(trendingMovies.results);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error("Error fetching movies:", error);
       }
     };
     fetchMovies();
@@ -35,47 +39,35 @@ const Recommendations = () => {
 
   return (
     <div>
-    <div className="recommendations-container-r">
-      <div className="movies-grid-r">
-        {selectedMovies.map((movie) => (
-          <div key={movie.id} className="movie-card-r">
-            <img src={MovieApi.getImage(movie.poster_path)} alt={movie.title} />
-            <div className="movie-info-r">
-              <h3>{movie.title}</h3>
-              <p>{movie.vote_average}</p>
+      <div className="recommendations-container-r">
+        <div className="movies-grid-r">
+          {selectedMovies.map((movie) => (
+            <div key={movie.id} className="movie-card-r" >
+              <img
+                src={MovieApi.getImage(movie.poster_path)}
+                alt={movie.title}
+              />
+              <div className="movie-info-r">
+                <h3>{movie.title}</h3>
+                <p>{movie.vote_average}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="navigation-buttons-r">
-        {currentPage > 1 && (
-          <button onClick={handlePrevPage} className="nav-button-r prev-r">&lt;</button>
-        )}
-        {currentPage < totalPages && (
-          <button onClick={handleNextPage} className="nav-button-r next-r">&gt;</button>
-        )}
+          ))}
+        </div>
+        <div className="navigation-buttons-r">
+          {currentPage > 1 && (
+            <button onClick={handlePrevPage} className="nav-button-r prev-r">
+              &lt;
+            </button>
+          )}
+          {currentPage < totalPages && (
+            <button onClick={handleNextPage} className="nav-button-r next-r">
+              &gt;
+            </button>
+          )}
+        </div>
       </div>
     </div>
-    <div className='footer'>
-      <div className='condiciones'>
-        <p>Ayuda</p>
-        <p>Indice del siti</p>
-        <p>Condiciones de uso</p>
-        <p>Politicas de privacidad</p>
-      </div>
-      <div className='nombresG'>
-        <p>Angel Andres BedoYa</p>
-        <p>David Londoño</p>
-        <p>Nicolas Vega</p>
-        <p>Juan Gomeez</p>
-      </div>
-      <p className='bootcamp'><strong>EliteStacks</strong></p>
-    </div>
-    
-    </div>
-    
-    
-    
   );
 };
 
