@@ -1,19 +1,23 @@
 import { MovieApi } from "./MovieApi.js"
 import "../stylesheets/SearchBar.css"
 import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 function ElementResults({ results, isFilterActive }) {
 
 
     return (
         <div className="container-results">
             {results.map((result) => (
-                <div className="cont-info" key={result.id}>
-                    <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
-                    {isFilterActive ?  <h2>{result.title}</h2>
-                                    : <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> }
-                    <div>⭐{result.vote_average}</div>
-                </div>
+
+                <Link to={`/details/${result.media_type || 'movie'}/${result.id}`} >
+                    <div key={result.id}>
+                        <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
+                        {isFilterActive ?  <h2>{result.title}</h2>
+                                        : <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> }
+                        <div>⭐{result.vote_average}</div>
+                    </div>
+                </Link>
+
             ))}
         </div>
     );
@@ -24,7 +28,7 @@ function Genre({ name, onClickHandler }) {
 
     const [isSelected, setisSelected] = useState(false)
     return (
-        <button style={{backgroundColor: isSelected ? 'green' : 'white' }}onClick={() => {onClickHandler(); setisSelected(!isSelected)}}>{name}</button>
+        <button style={{backgroundColor: isSelected ? 'green' : 'black' }}onClick={() => {onClickHandler(); setisSelected(!isSelected)}}>{name}</button>
     )
 }
 
