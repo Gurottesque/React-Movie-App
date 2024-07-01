@@ -8,7 +8,7 @@ function ElementResults({ results, isFilterActive }) {
     return (
         <div className="container-results">
             {results.map((result) => (
-                <div key={result.id}>
+                <div className="cont-info" key={result.id}>
                     <img className="img-search" src={MovieApi.getImage(result.poster_path)} alt={result.title || result.name}></img>
                     {isFilterActive ?  <h2>{result.title}</h2>
                                     : <h2>{result.media_type === 'movie' || result.media_type === 'collection' ? result.title : result.name}</h2> }
@@ -109,9 +109,7 @@ function SearchPage() {
 
     return (
         <>
-            <div className='search-bar'>
-                <button className="select-showtypes">
-                </button>
+            <div className='search-bar busquedaSec'>
                 <input
                     type="text"
                     value={inputValue}

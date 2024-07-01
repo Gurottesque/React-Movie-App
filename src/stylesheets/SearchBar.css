@@ -1,7 +1,24 @@
+.App{
+    position: relative;
+    width: 100%;
+}
 .search-bar {
     position: relative;
     width: 400px;
     margin: auto;
+}
+
+
+.header{
+    position: relative;
+}
+.busquedaSec{
+    position: absolute;
+    right: 50px;
+    max-width: 11vw;
+    top: 80px;
+    
+    
 }
 
 .search-input {
@@ -32,6 +49,26 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #eee;
+}
+
+.container-results {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2px;
+}
+.cont-info{
+    margin-bottom: 50px;
+}
+
+
+.cont-info{
+    width: 23vw;
+    height: auto;
+}
+.cont-info img{
+    width: 25vw;
+    height: auto;
 }
 
 .search-bar-result:last-child {
@@ -70,4 +107,109 @@
     right: 50px;
     background-color: #1a1a1a;
     top: 20px;
+}
+
+.filters{
+    position: absolute;
+    max-width: 12vw;
+    top: 180px;
+    right: 30px;
+border-radius: 10px;
+    background-color: #352b2b;
+    min-height: 400px;
+    
+    
+}
+
+.filters button{
+    border-radius: 10px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+@media(max-width:848px){
+    .filters{
+        position: absolute;
+        width: 15vw;
+        top: 150px;
+        right: 20px;
+    border-radius: 10px;
+        background-color: #352b2b;
+        min-height: 400px;
+    }
+   
+    
+}
+
+@media(max-width:500px){
+    .container-results {
+        width: 80vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1cm;
+    }
+    .cont-info{
+        width: 35vw;
+        height: auto;
+    }
+    .cont-info img{
+        width: 35vw;
+        height: auto;
+    }
+    .busquedaSec{
+        position: absolute;
+        right: 0px;
+        max-width: 20vw;
+        top: 80px;
+        
+        
+    }
+    
+    
+}
+@media(max-width:370px){
+    .App{
+        width: 100%;
+    }
+    .results-container{
+        width: 100%;
+    }
+    .container-results {
+        width: 80vw;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 1cm;
+    }
+    .cont-info{
+        width: 100vw;
+        height: auto;
+    }
+    .cont-info img{
+        width: 100vw;
+        height: auto;
+    }
+    .busquedaSec{
+        position: relative;
+        width:200px;
+        right: 0px;
+        top: 0px;
+        
+        height: 80px;
+        
+    }
+    .filters{
+        position: relative;
+        width: 90vw;
+        right: 0px;
+        height: 80px;
+    border-radius: 10px;
+        background-color: #352b2b;
+        min-height: 400px;
+    }
+    .results-container{
+        margin: 0 auto;
+    }
+
+    
+    
 }
